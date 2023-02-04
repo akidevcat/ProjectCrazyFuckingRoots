@@ -4,51 +4,33 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class MotherTree : MonoBehaviour
+public class MotherTree : DamageableEntity
 {
-    public float Health = 100.0f;
-    public float DieAnimationTime = 3.0f;
-    public float DieAnimationHeight = 5.0f;
+    public CanvasGroup DeathScreenCG;
 
-    public bool IsDead = false;
-
-    private bool AnimatingDeath = false;
-
-    public void TakeDamage(float damage)
+    private void Start()
     {
-        Health = Mathf.Max(Health - damage, 0.0f);
+        OnBecomeDead += Die;
     }
 
-    private void Update()
+    private void Die(object sender, EventArgs args)
     {
-        if (Health <= 0.0f)
+        AnimateDeathScreen();
+    }
+
+    private async UniTask AnimateDeathScreen()
+    {
+        for (var t = 0.0f; t < 1.0f; t += Time.deltaTime)
         {
-            Die();
-        }
-    }
-
-    private void Die()
-    {
-        AnimateMoveDown();
-    }
-
-    private async UniTask AnimateMoveDown()
-    {
-        if (IsDead)
-            return;
-        
-        AnimatingDeath = true;
-        var pos = transform.position;
-
-        for (var t = 0.0f; t < DieAnimationTime; t += Time.deltaTime)
-        {
-            pos.y -= DieAnimationHeight * Time.deltaTime / DieAnimationTime;
-            transform.position = pos;
+            DeathScreenCG.alpha = t;
             await UniTask.Yield();
         }
 
-        IsDead = true;
-        AnimatingDeath = false;
+        await UniTask.Delay(3000);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
