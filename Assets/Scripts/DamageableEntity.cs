@@ -22,7 +22,7 @@ public class DamageableEntity : MonoBehaviour
         Health = Mathf.Max(Health - damage, 0.0f);
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (Health <= 0.0f)
         {
