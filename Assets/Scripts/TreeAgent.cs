@@ -13,16 +13,19 @@ public class TreeAgent : BuildableEntity
     public float ManaDelay;
 
     public bool ShowHealthBar = true;
+    public bool RegisterOnStart = true;
     
     private float ManaTimeout;
 
     private GameController _gameController;
     private GameUIController _gameUIController;
+    private BuildController _buildController;
 
     private void Awake()
     {
         _gameController = FindObjectOfType<GameController>();
         _gameUIController = FindObjectOfType<GameUIController>();
+        _buildController = FindObjectOfType<BuildController>();
     }
 
     private void Start()
@@ -35,6 +38,9 @@ public class TreeAgent : BuildableEntity
         
         if (ShowHealthBar)
             _gameUIController.SpawnHealthBar(this, Vector3.up * 5.0f);
+        
+        if (RegisterOnStart)
+            _buildController.RegisterAgent(this);
     }
 
     protected override void Update()

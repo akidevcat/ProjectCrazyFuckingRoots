@@ -10,22 +10,28 @@ public class RootAgent : BuildableEntity
     public float AttackDelay;
     public int MaxTargets = 3;
 
+    public bool RegisterOnStart = true;
+
     private int _enemyLayer = 0;
     private float _attackTimeout = 0.0f;
     
     private GameUIController _gameUIController;
+    private BuildController _buildController;
 
     private void Awake()
     {
         _collidersBuffer = new Collider[MaxTargets];
         _enemyLayer = LayerMask.NameToLayer("Enemy");
         _gameUIController = FindObjectOfType<GameUIController>();
+        _buildController = FindObjectOfType<BuildController>();
     }
 
     private void Start()
     {
         OnBecomeDead += Die;
         _gameUIController.SpawnHealthBar(this, Vector3.up * 2.0f);
+        if (RegisterOnStart)
+            _buildController.RegisterAgent(this);
     }
 
     private Collider[] _collidersBuffer;
