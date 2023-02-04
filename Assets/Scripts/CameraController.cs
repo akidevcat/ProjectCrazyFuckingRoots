@@ -8,6 +8,13 @@ public class CameraController : MonoBehaviour
     public float RotationSpeed;
     public float CastDistance = 200.0f;
 
+    private int surfaceLayer;
+
+    private void Awake()
+    {
+        surfaceLayer = LayerMask.NameToLayer("Surface");
+    }
+    
     private void Update()
     {
         var moveX = Input.GetAxis("Horizontal");
@@ -24,7 +31,7 @@ public class CameraController : MonoBehaviour
 
         var ray = new Ray(transform.position, transform.forward);
         
-        if (Physics.Raycast(ray, out var hit, CastDistance, int.MaxValue))
+        if (Physics.Raycast(ray, out var hit, CastDistance, 1 << surfaceLayer))
         {
             transform.RotateAround(hit.point, Vector3.up, -rotate * RotationSpeed * Time.deltaTime);
         }
