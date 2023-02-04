@@ -30,9 +30,4 @@ public class EnemyMovement : MonoBehaviour
             }
         }*/
     }
-
-    public void SetTarget(Transform target)
-    {
-        moveToPoint = target;
-    }
 }
