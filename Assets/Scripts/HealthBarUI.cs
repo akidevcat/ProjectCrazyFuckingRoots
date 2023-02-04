@@ -11,14 +11,15 @@ public class HealthBarUI : MonoBehaviour
     
     private void Update()
     {
-        if (TargetEntity == null && DestroyOnTargetNull)
+        if (TargetEntity == null)
         {
-            Destroy(gameObject);
+            if (DestroyOnTargetNull)
+                Destroy(gameObject);
             return;
         }
         
         var scale = ScaleRT.localScale;
-        scale.x = TargetEntity.Health / 100.0f;
+        scale.x = TargetEntity.Health / TargetEntity.MaxHealth;
         ScaleRT.localScale = scale;
     }
 }

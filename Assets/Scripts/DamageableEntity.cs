@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class DamageableEntity : MonoBehaviour
 {
+    public float MaxHealth = 100.0f;
     public float Health = 100.0f;
     public float DieAnimationTime = 3.0f;
     public float DieAnimationHeight = 5.0f;

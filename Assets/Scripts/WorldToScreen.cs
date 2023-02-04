@@ -18,7 +18,7 @@ public class WorldToScreen : MonoBehaviour
 
     private void Update()
     {
-        if (DestroyOnTargetNull && TargetTransform == null)
+        if (TargetTransform == null && DestroyOnTargetNull)
         {
             Destroy(gameObject);
             return;

@@ -12,16 +12,20 @@ public class RootAgent : BuildableEntity
 
     private int _enemyLayer = 0;
     private float _attackTimeout = 0.0f;
+    
+    private GameUIController _gameUIController;
 
     private void Awake()
     {
         _collidersBuffer = new Collider[MaxTargets];
         _enemyLayer = LayerMask.NameToLayer("Enemy");
+        _gameUIController = FindObjectOfType<GameUIController>();
     }
 
     private void Start()
     {
         OnBecomeDead += Die;
+        _gameUIController.SpawnHealthBar(this, Vector3.up * 2.0f);
     }
 
     private Collider[] _collidersBuffer;
