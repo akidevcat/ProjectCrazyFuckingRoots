@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
         
         if (Physics.Raycast(ray, out var hit, CastDistance, int.MaxValue))
         {
-            transform.RotateAround(hit.point, Vector3.up, rotate * RotationSpeed * Time.deltaTime);
+            transform.RotateAround(hit.point, Vector3.up, -rotate * RotationSpeed * Time.deltaTime);
         }
     }
 }
