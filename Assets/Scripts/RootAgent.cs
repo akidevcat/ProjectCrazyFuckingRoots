@@ -48,6 +48,7 @@ public class RootAgent : BuildableEntity
         {
             var c = _collidersBuffer[i];
             
+            c.gameObject.SendMessage("TakeDamage", AttackDamage);
             // ToDo TakeDamage to enemy
             //AttackDamage
         }

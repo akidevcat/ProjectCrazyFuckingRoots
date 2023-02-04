@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
     public GameState State = GameState.Building;
     public int Round = 1;
     public float RoundTime = 0.0f;
-    public float Mana = 0.0f;
+    public int Mana = 100;
     
     private MotherTree _motherTree;
 
