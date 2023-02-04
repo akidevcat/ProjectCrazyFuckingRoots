@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RootAgent : DamageableEntity
+public class RootAgent : BuildableEntity
 {
     public float AttackRadius;
     public float AttackDamage;
