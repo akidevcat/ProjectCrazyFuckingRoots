@@ -133,6 +133,17 @@ public class BuildController : MonoBehaviour
             _gameUIController.SpawnFloatingText("<color=red>Not Enough Mana</color>", point);
             return false;
         }
+
+        float minBuildRange = 0.0f;
+        if (prefabEntity is TreeAgent)
+        {
+            minBuildRange = MinTreeBuildRange;
+        }
+
+        if (prefabEntity is RootAgent)
+        {
+            minBuildRange = MinRootBuildRange;
+        }
         
         var flTreeFound = false;
         
@@ -141,7 +152,7 @@ public class BuildController : MonoBehaviour
         {
             var tree = (TreeAgent)t;
             var d = Vector3.Distance(t.transform.position, point);
-            if (d < MinTreeBuildRange)
+            if (d < minBuildRange)
             {
                 _gameUIController.SpawnFloatingText("<color=red>Too Close</color>", point);
                 return false;

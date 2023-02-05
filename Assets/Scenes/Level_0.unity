@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18382004, g: 0.22910218, b: 0.30393395, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -904,6 +904,8 @@ MonoBehaviour:
   MovementSpeed: 50
   RotationSpeed: 100
   CastDistance: 200
+  BoxSize: {x: 400, y: 400}
+  BoxPivot: {fileID: 5009897491006506202}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,14 +993,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.28117922, y: -0.03418331, z: 0.3985401, w: 0.87231624}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 31.185, y: 11.085, z: 52.211}
 --- !u!114 &410087042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2259,7 +2261,7 @@ PrefabInstance:
     - target: {fileID: 1672643746970871237, guid: 8c29ad610aed49f41b923d7d3bcce3df,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1672643746970871237, guid: 8c29ad610aed49f41b923d7d3bcce3df,
         type: 3}
@@ -2665,7 +2667,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1867321840 stripped
 RectTransform:
@@ -2854,7 +2856,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1962840537
 GameObject:
@@ -3220,7 +3222,7 @@ PrefabInstance:
     - target: {fileID: 1221185278308641906, guid: 1e29b573cdd62d64ba217550869391a6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1221185278308641906, guid: 1e29b573cdd62d64ba217550869391a6,
         type: 3}

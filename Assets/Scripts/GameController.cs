@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour
     {
         State = GameState.Building;
         RoundTime = _balanceController.BuildingTimeSeconds;
+        Mana = _balanceController.StartManaValue;
     }
 
     private void Update()
