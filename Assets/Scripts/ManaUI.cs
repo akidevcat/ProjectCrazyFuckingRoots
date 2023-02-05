@@ -17,6 +17,6 @@ public class ManaUI : MonoBehaviour
 
     private void Update()
     {
-        _text.text = $"Mana: {_gameController.Mana}";
+        _text.text = $"Water: {_gameController.Mana}";
     }
 }

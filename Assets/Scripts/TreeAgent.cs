@@ -9,8 +9,6 @@ public class TreeAgent : BuildableEntity
 {
     public DecalProjector Decal;
     public float BuildingRange;
-    public int ManaValue;
-    public float ManaDelay;
 
     public bool ShowHealthBar = true;
     public bool RegisterOnStart = true;
@@ -20,12 +18,14 @@ public class TreeAgent : BuildableEntity
     private GameController _gameController;
     private GameUIController _gameUIController;
     private BuildController _buildController;
+    private BalanceController _balanceController;
 
     private void Awake()
     {
         _gameController = FindObjectOfType<GameController>();
         _gameUIController = FindObjectOfType<GameUIController>();
         _buildController = FindObjectOfType<BuildController>();
+        _balanceController = FindObjectOfType<BalanceController>();
     }
 
     private void Start()
@@ -49,7 +49,7 @@ public class TreeAgent : BuildableEntity
 
         if (_gameController.State != GameState.Defending)
         {
-            ManaTimeout = ManaDelay;
+            ManaTimeout = _balanceController.TreeManaRateSeconds;
             return;
         }
         
@@ -59,14 +59,15 @@ public class TreeAgent : BuildableEntity
             return;
         }
 
-        ManaTimeout = ManaDelay;
+        ManaTimeout = _balanceController.TreeManaRateSeconds;
 
-        _gameController.Mana += ManaValue;
-        _gameUIController.SpawnFloatingText($"+{ManaValue}", transform.position + Vector3.up * 6.0f);
+        _gameController.Mana += _balanceController.TreeManaValue;
+        _gameUIController.SpawnFloatingText($"+{_balanceController.TreeManaValue}", transform.position + Vector3.up * 6.0f);
     }
 
     private void Die(object sender, EventArgs args)
     {
+        _buildController.UnregisterAgent(this);
         Destroy(gameObject);
     }
 }

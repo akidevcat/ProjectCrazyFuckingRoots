@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class RootAgent : BuildableEntity
 {
+    public DecalProjector Decal;
     public float AttackRadius;
     public float AttackDamage;
     public float AttackDelay;
@@ -29,6 +31,10 @@ public class RootAgent : BuildableEntity
     private void Start()
     {
         OnBecomeDead += Die;
+        var size = Decal.size;
+        size.x = AttackRadius * 2.0f;
+        size.y = AttackRadius * 2.0f;
+        Decal.size = size;
         _gameUIController.SpawnHealthBar(this, Vector3.up * 2.0f);
         if (RegisterOnStart)
             _buildController.RegisterAgent(this);
@@ -66,6 +72,7 @@ public class RootAgent : BuildableEntity
 
     private void Die(object sender, EventArgs args)
     {
+        _buildController.UnregisterAgent(this);
         Destroy(gameObject);
     }
 }

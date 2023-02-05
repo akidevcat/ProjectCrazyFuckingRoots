@@ -1,7 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public class BuildController : MonoBehaviour
 {
@@ -72,8 +71,20 @@ public class BuildController : MonoBehaviour
 
         if (entity is TreeAgent)
         {
-            Debug.Log("Tree registered");
             _builtTrees.Add(entity);
+        }
+    }
+    
+    public void UnregisterAgent(BuildableEntity entity)
+    {
+        if (entity is RootAgent)
+        {
+            _builtRoots.Remove(entity);
+        }
+
+        if (entity is TreeAgent)
+        {
+            _builtTrees.Remove(entity);
         }
     }
     
@@ -94,13 +105,12 @@ public class BuildController : MonoBehaviour
             var d = Vector3.Distance(t.transform.position, point);
             if (d < MinTreeBuildRange)
             {
-                _gameUIController.SpawnFloatingText("<color=red>Cannot Build Here</color>", point);
+                _gameUIController.SpawnFloatingText("<color=red>Too Close</color>", point);
                 return false;
             }
             if (d <= tree.BuildingRange)
             {
                 flTreeFound = true;
-                break;
             }
         }
         
@@ -111,7 +121,7 @@ public class BuildController : MonoBehaviour
             var d = Vector3.Distance(root.transform.position, point);
             if (d < MinRootBuildRange)
             {
-                _gameUIController.SpawnFloatingText("<color=red>Cannot Build Here</color>", point);
+                _gameUIController.SpawnFloatingText("<color=red>Too Close</color>", point);
                 return false;
             }
         }
@@ -122,9 +132,9 @@ public class BuildController : MonoBehaviour
             return false;
         }
 
-        // ToDo
         _gameController.Mana -= prefabEntity.ManaPrice;
-        Instantiate(prefabEntity.gameObject, point, Quaternion.identity);
+        var agent = Instantiate(prefabEntity.gameObject, point, Quaternion.identity);
+        agent.transform.rotation = Quaternion.AngleAxis(UnityEngine.Random.Range(0.0f, 360.0f), Vector3.up);
         
         return true;
     }

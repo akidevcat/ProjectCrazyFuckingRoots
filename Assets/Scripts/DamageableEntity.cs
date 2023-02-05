@@ -13,6 +13,7 @@ public class DamageableEntity : MonoBehaviour
     public float DieAnimationHeight = 5.0f;
 
     public event EventHandler OnBecomeDead;
+    public event EventHandler OnStartDying;
     
     public bool IsDead { get; private set; }
     
@@ -33,6 +34,7 @@ public class DamageableEntity : MonoBehaviour
 
     private void Die()
     {
+        OnStartDying?.Invoke(this, EventArgs.Empty);
         AnimateMoveDown();
     }
 

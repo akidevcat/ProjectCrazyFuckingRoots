@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class BalanceController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public float RoundTimeSeconds = 60.0f;
+    public float BuildingTimeSeconds = 30.0f;
+    public int TreeManaValue = 3;
+    public float TreeManaRateSeconds = 3.0f;
+
 }
