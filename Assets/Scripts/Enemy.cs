@@ -37,6 +37,7 @@ public class Enemy : DamageableEntity
     public void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
+        Animator.SetTrigger("Take Damage");
     }
     
     // Update is called once per frame
@@ -78,6 +79,7 @@ public class Enemy : DamageableEntity
     private void OnDying(object sender, EventArgs args)
     {
         GetComponent<NavMeshAgent>().enabled = false;
+        Animator.SetTrigger("Die");
     }
     
     private void Die(object sender, EventArgs args)
