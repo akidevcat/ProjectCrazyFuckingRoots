@@ -1989,7 +1989,7 @@ MonoBehaviour:
   Camera: {fileID: 330585545}
   CastDistance: 200
   State: 1
-  MinTreeBuildRange: 5
+  MinTreeBuildRange: 10
   MinRootBuildRange: 5
   BuildingRT: {fileID: 1962840538}
 --- !u!4 &1654770850

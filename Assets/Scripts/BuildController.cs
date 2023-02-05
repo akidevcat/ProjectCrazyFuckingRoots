@@ -72,6 +72,7 @@ public class BuildController : MonoBehaviour
 
         if (entity is TreeAgent)
         {
+            Debug.Log("Tree registered");
             _builtTrees.Add(entity);
         }
     }
@@ -91,7 +92,12 @@ public class BuildController : MonoBehaviour
         {
             var tree = (TreeAgent)t;
             var d = Vector3.Distance(t.transform.position, point);
-            if (d <= tree.BuildingRange && d > MinRootBuildRange)
+            if (d < MinTreeBuildRange)
+            {
+                _gameUIController.SpawnFloatingText("<color=red>Cannot Build Here</color>", point);
+                return false;
+            }
+            if (d <= tree.BuildingRange)
             {
                 flTreeFound = true;
                 break;
