@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class GameUIController : MonoBehaviour
 {
+
+    public GraphicRaycaster Raycaster;
+    public EventSystem EventSystem;
 
     public void SpawnHealthBar(DamageableEntity entity, Vector3 offset)
     {

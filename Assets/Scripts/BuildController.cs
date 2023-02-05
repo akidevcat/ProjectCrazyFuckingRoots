@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Random = System.Random;
 
 public class BuildController : MonoBehaviour
@@ -23,7 +24,10 @@ public class BuildController : MonoBehaviour
 
     private GameController _gameController;
     private GameUIController _gameUIController;
-    
+
+    private BuildableEntity _treePrefabEntity;
+    private BuildableEntity _rootPrefabEntity;
+
     private int surfaceLayer;
 
     private void Awake()
@@ -34,6 +38,8 @@ public class BuildController : MonoBehaviour
         _builtRoots = new List<BuildableEntity>();
         _gameController = FindObjectOfType<GameController>();
         _gameUIController = FindObjectOfType<GameUIController>();
+        _treePrefabEntity = Resources.Load<GameObject>("Prefabs/Tree").GetComponent<BuildableEntity>();
+        _rootPrefabEntity = Resources.Load<GameObject>("Prefabs/Root").GetComponent<BuildableEntity>();
     }
 
     private void Update()
@@ -45,7 +51,13 @@ public class BuildController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             var ray = Camera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out var hit, CastDistance))
+            var pEvent = new PointerEventData(_gameUIController.EventSystem)
+            {
+                position = Input.mousePosition
+            };
+            var rResults = new List<RaycastResult>();
+            _gameUIController.Raycaster.Raycast(pEvent, rResults);
+            if (rResults.Count == 0 && Physics.Raycast(ray, out var hit, CastDistance))
             {
                 if (hit.collider.gameObject.layer == surfaceLayer)
                 {
@@ -55,8 +67,8 @@ public class BuildController : MonoBehaviour
                     if (!_buildingRTW2S.gameObject.activeSelf)
                         _buildingRTW2S.gameObject.SetActive(true);
                     State = BuildingState.SelectingBaseType;
-                    BuildAgent(_selectedPoint,
-                        Resources.Load<GameObject>("Prefabs/Tree").GetComponent<BuildableEntity>());
+                    // BuildAgent(_selectedPoint,
+                    //     Resources.Load<GameObject>("Prefabs/Tree").GetComponent<BuildableEntity>());
                 }
             }
         }
@@ -85,6 +97,32 @@ public class BuildController : MonoBehaviour
         if (entity is TreeAgent)
         {
             _builtTrees.Remove(entity);
+        }
+    }
+
+    public void UIDeselect()
+    {
+        _selectedPoint = Vector3.zero;
+        _buildingRTW2S.gameObject.SetActive(false);
+    }
+
+    public void UIBuildTree()
+    {
+        var pos = _selectedPoint;
+        if (BuildAgent(pos, _treePrefabEntity))
+        {
+            UIDeselect();
+            _gameUIController.SpawnFloatingText($"<color=red>-{_treePrefabEntity.ManaPrice}</color>", pos);
+        }
+    }
+
+    public void UIBuildRoot()
+    {
+        var pos = _selectedPoint;
+        if (BuildAgent(pos, _rootPrefabEntity))
+        {
+            UIDeselect();
+            _gameUIController.SpawnFloatingText($"<color=red>-{_rootPrefabEntity.ManaPrice}</color>", pos);
         }
     }
     
