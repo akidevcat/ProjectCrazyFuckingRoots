@@ -11,7 +11,7 @@ public class EnemySpawnManager : MonoBehaviour
     private List<GameObject> aliveEnemies;
     private List<GameObject> deadEnemies;
 
-    private int waveCount = 17;
+    private int waveCount = 10;
     void Start()
     {
         amountOfDifferrentEnemies = enemyPrefabs.Count;

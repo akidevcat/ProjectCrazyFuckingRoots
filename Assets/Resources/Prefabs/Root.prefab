@@ -119,8 +119,8 @@ MonoBehaviour:
   ManaPrice: 100
   Decal: {fileID: 3258728180601200111}
   AttackRadius: 8
-  AttackDamage: 0
-  AttackDelay: 0
+  AttackDamage: 10
+  AttackDelay: 1
   MaxTargets: 3
   RegisterOnStart: 1
 --- !u!1 &9023603435500622481
